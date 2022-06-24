@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace PeriodicTimerSample
 {
@@ -10,7 +9,7 @@ namespace PeriodicTimerSample
     {
         private PeriodicTimer _periodicTimer;
 
-        private CancellationTokenSource _token;
+        private CancellationTokenSource _token = new();
 
         private Task? _timerTask;
 
@@ -20,9 +19,7 @@ namespace PeriodicTimerSample
             _periodicTimer = new(timespan);
             
         }
-        public ObservableCollection<string> Names {
-            get => _names;
-        }
+        public ObservableCollection<string> Names => _names;
         public void Start()
         {
             _token = new();
