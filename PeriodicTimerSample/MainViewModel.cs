@@ -13,13 +13,12 @@ namespace PeriodicTimerSample
 
         private Task? _timerTask;
 
-        private readonly ObservableCollection<string> _names = new();
         public MainViewModel(TimeSpan timespan)
         {
             _periodicTimer = new(timespan);
             
         }
-        public ObservableCollection<string> Names => _names;
+        public ObservableCollection<string> Names { get; } = new();
         public void Start()
         {
             _token = new();
@@ -31,7 +30,7 @@ namespace PeriodicTimerSample
             {
                 while (await _periodicTimer.WaitForNextTickAsync(_token.Token))
                 {
-                    _names.Add($"Clone Number : {Random.Shared.Next(1, 1000)}");
+                    Names.Add($"Clone Number : {Random.Shared.Next(1, 1000)}");
                 }
             }
             catch (OperationCanceledException)
